@@ -28,8 +28,6 @@ public class NBodySimulator {
 
             universe.update(timeStep);
 
-
-            //StdDraw.increaseTime(dt); // update bodies
             drawUniverse(); // tell each body to draw itself
             StdDraw.show();
             StdDraw.pause(10);
@@ -54,9 +52,7 @@ public class NBodySimulator {
         //  For this we need to ask to a Universe its number of bodies n
         //  and the position of the i-th body, i=0...n-1. Also, a Body
         //  must have a getPosition() method
-        //StdDraw.setPenRadius(0.05);
-        //StdDraw.setPenColor(StdDraw.RED);
-        //StdDraw.point(0.5,0.5);
+
 
         Body[] planets=universe.getBodies();
         for(int i = 0; i < universe.getNumberBodies();i++)
