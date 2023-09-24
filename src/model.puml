@@ -1,0 +1,76 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+
+
+class Body {
+- r : Vector
+- v : Vector
+- mass : double
++ Body(r : Vector, v : Vector, mass : double)
++ move(f:Vector, dt:double)
++ forceFrom(b : Body) : Vector
++ toString(): Sting
+
+}
+
+class Universe {
+- numBodies : int
+- radius : double
+
++ Universe(fname : String)
++ Universe(n : int, tipo : int)
+
++ update (dt : double)
++ getRadius() : double
++ getBodies() : Bodies[]
++ getNumberBodies() : int
+}
+
+class NBodySimulator {
+-universe : Universe
+- timeStep : double
+- pauseTime : int
+- trace : boolean
+
++ NBodySimulator(universe : Universe, dt : double,
+pt : int, doTrace : boolean)
+
++ simulate()
++ drawUniverse()
+- createCanvas()
+}
+
+Universe *-> "1..*" Body : bodies
+NBodySimulator *-right-> "1..*" Universe : universe
+
+note bottom of Universe
+Here we have two constructors in function of which
+argument we recive and their type.
+If we receive n = 2 and tipo = 1 the central_configuration
+will be used, if tipo = 2 then nplus1 will be.
+
+end note
+
+
+class Main{
++ main (args : String[])
+}
+note top of Main
+According arg[4] one of the constructor will
+be initialize and tag by nplus or centralConfiguration:
+
+ if(constructorIndicator.equals("central_configuration")){
+            universe = new Universe(Integer.parseInt(args[4]), 1);
+        }else {
+            if (constructorIndicator.equals("nplus1")) {
+                universe = new Universe(Integer.parseInt(args[4]), 2);
+            } else {
+                universe = new Universe(args[4]);
+            }
+        }
+
+end note
+
+@enduml
